@@ -1,5 +1,5 @@
 // 30 Seconden: offline spelen. De pagina zelf eerst van internet (zodat updates meteen binnenkomen), anders uit de cache.
-const VERSIE = 'ts30-v3';
+const VERSIE = 'ts30-v4';
 const BESTANDEN = ['./', 'index.html', 'manifest.webmanifest', 'favicon.png', 'apple-touch-icon.png', 'icoon-192.png', 'icoon-512.png', 'icoon-maskable-512.png'];
 self.addEventListener('install', e => { e.waitUntil(caches.open(VERSIE).then(c => c.addAll(BESTANDEN)).then(() => self.skipWaiting())); });
 self.addEventListener('activate', e => { e.waitUntil(caches.keys().then(ks => Promise.all(ks.filter(k => k !== VERSIE).map(k => caches.delete(k)))).then(() => self.clients.claim())); });
